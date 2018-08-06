@@ -80,7 +80,7 @@ class IntParameter(NumberParameter):
 
 class FloatParameter(NumberParameter):
     def to_python(self, value):
-        return float(super(FloatParameter, self).to_python())
+        return float(super(FloatParameter, self).to_python(value))
 
     def to_json(self, value):
         return float(value)
@@ -88,10 +88,24 @@ class FloatParameter(NumberParameter):
 
 class BooleanParameter(Parameter):
     def to_python(self, value):
-        if isinstance(value, six.string_types) and value.lower() == 'false':
-            return False
+        if isinstance(value, six.string_types):
+            if value.lower() == 'true':
+                return True
+            elif value.lower() == 'false':
+                return False
+            else:
+                raise ParameterNotValidError('Invalid value for boolean parameter: {}'.format(value))
 
-        return bool(value)
+        if isinstance(value, int):
+            if value in (0, 1):
+                return bool(value)
+            else:
+                raise ParameterNotValidError('Invalid value for boolean parameter: {}'.format(value))
+
+        if isinstance(value, bool):
+            return bool(value)
+
+        raise ParameterNotValidError('Invalid type for boolean parameter: {}'.format(value.__class__.__name__))
 
     def to_json(self, value):
         return bool(value)
