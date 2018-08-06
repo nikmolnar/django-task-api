@@ -3,7 +3,7 @@ from importlib import import_module
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 
-TASK_API_BACKEND = settings.get('TASK_API_BACKEND', 'task_api.backends.celery.CeleryBackend')
+TASK_API_BACKEND = getattr(settings, 'TASK_API_BACKEND', 'task_api.backends.celery.CeleryBackend')
 
 
 def get_backend_cls():

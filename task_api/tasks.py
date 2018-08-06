@@ -32,6 +32,7 @@ class Task(object):
         backend = backend_cls()
         backend.run_task(info, '.'.join((getmodule(self.__class__).__name__, self.__class__.__name__)))
         info.save()
+        return info
 
     def execute(self, info):
         """ Execute the task """

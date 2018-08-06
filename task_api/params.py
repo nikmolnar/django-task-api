@@ -45,12 +45,12 @@ class StringParameter(Parameter):
         if isinstance(value, six.string_types):
             return value
         elif isinstance(value, numbers.Number):
-            return str(value)
+            return six.text_type(value)
 
         raise ParameterNotValidError('Value must be a string or number')
 
     def to_json(self, value):
-        return str(value)
+        return six.text_type(value)
 
 
 class NumberParameter(Parameter):

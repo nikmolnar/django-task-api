@@ -1,5 +1,7 @@
+import json
 from importlib import import_module
 
+import six
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 from rest_framework import serializers
@@ -18,6 +20,11 @@ class TaskInfoSerializer(serializers.ModelSerializer):
         model = TaskInfo
         fields = ('uuid', 'task', 'status', 'progress', 'target', 'inputs', 'outputs', 'created', 'started', 'finished')
         read_only_fields = ('uuid', 'status', 'progress', 'target', 'outputs', 'created', 'started', 'finished')
+
+    def to_representation(self, instance):
+        instance.inputs = json.loads(instance.inputs)
+        instance.outputs = json.loads(instance.outputs)
+        return super().to_representation(instance)
 
     def get_task_cls(self, task):
         for class_str in BACKGROUND_TASKS:
@@ -50,9 +57,9 @@ class TaskInfoSerializer(serializers.ModelSerializer):
             try:
                 param.to_python(data['inputs'][name])
             except ParameterNotValidError as ex:
-                raise serializers.ValidationError("Input '{}' is invalid: {}".format(name, str(ex)))
+                raise serializers.ValidationError("Input '{}' is invalid: {}".format(name, six.text_type(ex)))
 
         return data
 
     def create(self, validated_data):
-        self.get_task_cls(validated_data['task']).start(validated_data['inputs'])
+        return self.get_task_cls(validated_data['task'])().start(validated_data['inputs'])
