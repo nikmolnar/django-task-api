@@ -7,7 +7,7 @@ setup(
     version='0.0.0',
     packages=['task_api', 'task_api.backends'],
     install_requires=['djangorestframework==3.*', 'django>=1.11', 'celery==4.*', 'six'],
-    tests_require=['pytest-django'],
+    tests_require=['pytest-django', 'mock'],
     url='https://github.com/nikmolnar/django-task-api',
     license='MIT'
 )

@@ -10,6 +10,8 @@ celery = "==4.*"
 six = "*"
 
 [dev-packages]
+mock = "*"
+pytest-django = "*"
 
 [requires]
 python_version = "3.6"
