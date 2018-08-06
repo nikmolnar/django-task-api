@@ -1,7 +1,7 @@
 import json
+from unittest.mock import MagicMock, patch
 
 import pytest
-from django.conf import settings
 
 from task_api.models import TaskInfo
 from task_api.params import StringParameter
@@ -14,7 +14,8 @@ class CreateTask(Task):
 
 
 @pytest.mark.django_db(transaction=True)
-def test_create_task(client):
+@patch('task_api.backends.celery.CeleryBackend')
+def test_create_task(_, client, settings):
     settings.BACKGROUND_TASKS = ['tests.test_api.CreateTask']
 
     response = client.post(
