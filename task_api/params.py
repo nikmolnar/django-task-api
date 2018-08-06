@@ -25,7 +25,7 @@ class Parameter(object):
 class ListParameter(Parameter):
     def __init__(self, param_type, *args, **kwargs):
         self.param_type = param_type
-        super().__init__(*args, **kwargs)
+        super(ListParameter, self).__init__(*args, **kwargs)
 
     def to_python(self, value):
         if not isinstance(value, list):
@@ -72,7 +72,7 @@ class NumberParameter(Parameter):
 
 class IntParameter(NumberParameter):
     def to_python(self, value):
-        return int(super().to_python(value))
+        return int(super(IntParameter, self).to_python(value))
 
     def to_json(self, value):
         return int(value)
@@ -80,7 +80,7 @@ class IntParameter(NumberParameter):
 
 class FloatParameter(NumberParameter):
     def to_python(self, value):
-        return float(super().to_python())
+        return float(super(FloatParameter, self).to_python())
 
     def to_json(self, value):
         return float(value)

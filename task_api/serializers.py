@@ -24,7 +24,7 @@ class TaskInfoSerializer(serializers.ModelSerializer):
     def to_representation(self, instance):
         instance.inputs = json.loads(instance.inputs)
         instance.outputs = json.loads(instance.outputs)
-        return super().to_representation(instance)
+        return super(TaskInfoSerializer, self).to_representation(instance)
 
     def get_task_cls(self, task):
         for class_str in BACKGROUND_TASKS:

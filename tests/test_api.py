@@ -26,7 +26,7 @@ def test_create_task(_, client, settings):
     assert response.status_code == 201
     assert TaskInfo.objects.all().count() == 1
 
-    data = json.loads(response.content)
+    data = json.loads(response.content.decode())
 
     assert data['inputs'] == {'test': 'Test'}
     assert data['uuid'] == str(TaskInfo.objects.all().get().uuid)
