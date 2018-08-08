@@ -29,8 +29,7 @@ class Task(object):
             inputs=json.dumps(inputs or {}),
             created=now()
         )
-        backend = backend_cls()
-        backend.run_task(info, '.'.join((getmodule(self.__class__).__name__, self.__class__.__name__)))
+        backend_cls().run_task(info, '.'.join((getmodule(self.__class__).__name__, self.__class__.__name__)))
         info.save()
         return info
 

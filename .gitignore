@@ -3,3 +3,4 @@ syntax: glob
 /db.sqlite3
 *.egg-info/
 /.pytest_cache/
+__pycache__/
