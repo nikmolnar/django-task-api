@@ -20,6 +20,7 @@ class Task(object):
     def __init__(self):
         self.inputs = copy.copy(self.inputs)
         self.outputs = copy.copy(self.outputs)
+        self.info = None
 
     def start(self, inputs):
         """ Starts the task on a background process """
@@ -38,15 +39,19 @@ class Task(object):
 
         inputs = json.loads(info.inputs)
 
-        TaskInfo.objects.filter(pk=info.pk).update(status='running')
+        TaskInfo.objects.filter(pk=info.pk).update(status='running', started=now())
+        self.info = info
+
         try:
             outputs = self.run(**{k: v.to_python(inputs[k]) for k, v in self.inputs.items() if k in inputs})
         except:  # Log and ignore exceptions
-            TaskInfo.objects.filter(pk=info.pk).update(status='failed')
+            TaskInfo.objects.filter(pk=info.pk).update(status='failed', finished=now())
             logger.exception('Task {} failed with inputs: {}'.format(self.__class__.__name__, inputs))
             return
 
-        TaskInfo.objects.filter(pk=info.pk).update(status='succeeded')
+        self.info = None
+
+        TaskInfo.objects.filter(pk=info.pk).update(status='succeeded', finished=now())
 
         if outputs is None:
             return
@@ -55,6 +60,32 @@ class Task(object):
         elif len(self.outputs) == 1:
             k = list(self.outputs.keys())[0]
             info.outputs = json.dumps({k: self.outputs[k].to_json(outputs)})
+
+    def add_message(self, message):
+        """ Add a message to the task, which can be accessed from the API """
+
+        messages = json.loads(self.info.messages)
+        messages.append(message)
+        self.info.message = json.dumps(messages)
+        self.info.save()
+
+    def set_target(self, target):
+        """ Set progress target """
+
+        self.info.target = target
+        self.info.save()
+
+    def set_progress(self, progress):
+        """ Set task progress """
+
+        self.info.progress = progress
+        self.info.save()
+
+    def inc_progress(self, increment=1):
+        """ Increment the task progress by some amount """
+
+        self.info.progress += increment
+        self.info.save()
 
     def run(self, **kwargs):
         """ Task implementation """

@@ -19,6 +19,7 @@ class TaskInfo(models.Model):
     target = models.IntegerField(null=True)
     inputs = models.TextField(default='{}')
     outputs = models.TextField(default='{}')
+    messages = models.TextField(default='[]')
     created = models.DateTimeField()
     started = models.DateTimeField(null=True)
     finished = models.DateTimeField(null=True)

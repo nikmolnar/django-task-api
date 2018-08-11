@@ -1,6 +1,7 @@
 import json
 
 import pytest
+from django.utils.timezone import now
 from mock import patch
 
 from task_api.models import TaskInfo
@@ -75,3 +76,29 @@ def test_create_task_invalid_inputs(client):
 
     assert response.status_code == 400
     assert 'test' in response.content.decode()
+
+
+@pytest.mark.django_db(transaction=True)
+def test_get_task(client):
+    info = TaskInfo.objects.create(
+        task='tests.test_api.CreateTask',
+        backend_data='Not public',
+        status='running',
+        inputs=json.dumps({'input': 'some input'}),
+        outputs=json.dumps({'output': 'some output'}),
+        messages=json.dumps(['message 1', 'message 2']),
+        created=now(),
+        started=now(),
+        finished=now()
+    )
+
+    response = client.get('/tasks/{}/'.format(info.uuid))
+
+    assert response.status_code == 200
+
+    data = json.loads(response.content.decode())
+
+    assert 'backend_data' not in data
+    assert data['inputs']['input'] == 'some input'
+    assert data['outputs']['output'] == 'some output'
+    assert data['messages'] == ['message 1', 'message 2']

@@ -15,15 +15,22 @@ BACKGROUND_TASKS = getattr(settings, 'BACKGROUND_TASKS', [])
 class TaskInfoSerializer(serializers.ModelSerializer):
     inputs = serializers.DictField(allow_null=True)
     outputs = serializers.DictField(read_only=True)
+    messages = serializers.ListField(read_only=True)
 
     class Meta:
         model = TaskInfo
-        fields = ('uuid', 'task', 'status', 'progress', 'target', 'inputs', 'outputs', 'created', 'started', 'finished')
-        read_only_fields = ('uuid', 'status', 'progress', 'target', 'outputs', 'created', 'started', 'finished')
+        fields = (
+            'uuid', 'task', 'status', 'progress', 'target', 'inputs', 'outputs', 'messages', 'created', 'started',
+            'finished'
+        )
+        read_only_fields = (
+            'uuid', 'status', 'progress', 'target', 'outputs', 'messages', 'created', 'started', 'finished'
+        )
 
     def to_representation(self, instance):
         instance.inputs = json.loads(instance.inputs)
         instance.outputs = json.loads(instance.outputs)
+        instance.messages = json.loads(instance.messages)
         return super(TaskInfoSerializer, self).to_representation(instance)
 
     def get_task_cls(self, task):
