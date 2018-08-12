@@ -4,3 +4,6 @@ syntax: glob
 *.egg-info/
 /.pytest_cache/
 __pycache__/
+node_modules/
+dist/
+/task_api/static/django-task-api.js
