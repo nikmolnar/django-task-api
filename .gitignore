@@ -6,4 +6,5 @@ syntax: glob
 __pycache__/
 node_modules/
 dist/
+build/
 /task_api/static/django-task-api.js
