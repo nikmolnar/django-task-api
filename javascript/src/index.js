@@ -13,7 +13,7 @@ export const options = {
 export const run = (task, inputs, progressCallback = null, callback = null, errback = null) => {
     const promise = new Promise((resolve, reject) => {
         createTask(task, inputs).then(json => {
-            pollUntilDone(json.uuid).then(json => {
+            pollUntilDone(json.uuid, progressCallback).then(json => {
                 if (json.status === 'succeeded') {
                     if (callback !== null) {
                         callback(json)
@@ -61,7 +61,7 @@ const createTask = (task, inputs) => {
     }).then(raiseForStatus).then(response => response.json())
 }
 
-const pollUntilDone = uuid => {
+const pollUntilDone = (uuid, progressCallback = null) => {
     let { baseURL, corsMode, pollInterval } = options
 
     return new Promise((resolve, reject) => {
@@ -79,6 +79,10 @@ const pollUntilDone = uuid => {
                 .then(raiseForStatus)
                 .then(response => response.json())
                 .then(json => {
+                    if (progressCallback !== null) {
+                        progressCallback(json)
+                    }
+
                     if (json.status === 'pending' || json.status === 'running') {
                         setTimeout(() => poll(), pollInterval)
                     }

@@ -1,4 +1,5 @@
 import path from 'path'
+import webpack from 'webpack'
 import UglifyJsPlugin from 'uglifyjs-webpack-plugin'
 
 export default {
@@ -21,7 +22,8 @@ export default {
     },
     output: {
         filename: 'django-task-api.js',
-        path: path.resolve(__dirname, 'dist')
+        path: path.resolve(__dirname, 'dist'),
+        library: 'TaskAPI'
     },
     resolve: {
         modules: [

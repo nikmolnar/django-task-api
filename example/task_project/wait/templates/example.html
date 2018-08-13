@@ -1,0 +1,48 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Task API Example</title>
+
+    <script src="{% static "django-task-api.js" %}"></script>
+    <script type="text/javascript">
+        function startTask() {
+            TaskAPI.run('wait', {'start': 0}, function(json) {
+                if (json.target === null || json.progress === null) {
+                    return
+                }
+                document.getElementById('status').innerHTML = 'Progress: ' + json.progress + ' / ' + json.target
+            }).then(function() {
+                document.getElementById('button').disabled = false
+            })
+
+            document.getElementById('button').disabled = true
+        }
+    </script>
+    <style type="text/css">
+        .content {
+            position: fixed;
+            top: 25%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .content button {
+            margin-top: 5px;
+            width: 100px;
+        }
+
+        .center {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <div id="status">Click "Run" to start the task.</div>
+        <div class="center"><button onclick="startTask()" id="button">Run</button></div>
+    </div>
+</body>
+</html>

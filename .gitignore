@@ -1,6 +1,7 @@
 syntax: glob
 
 /db.sqlite3
+/example/task_project/db.sqlite3
 *.egg-info/
 /.pytest_cache/
 __pycache__/
