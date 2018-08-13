@@ -22,6 +22,11 @@ class BuildJSCommand(Command):
 
     def run(self):
         self.announce('Building JavaScript...')
+        p = Popen(['npm', 'install'], cwd=os.path.join(DIR, 'javascript'))
+        if p.wait() > 0:
+            self.announce(p.stderr, level=ERROR)
+            raise OSError('npm install failed')
+
         p = Popen(['npm', 'run-script', 'build'], cwd=os.path.join(DIR, 'javascript'))
         if p.wait() > 0:
             self.announce(p.stderr, level=ERROR)
