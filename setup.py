@@ -36,19 +36,19 @@ class BuildJSCommand(Command):
 class BuildCommand(build_py):
     def run(self):
         self.run_command('build_js')
-        super().run()
+        super(BuildCommand, self).run()
 
 
 class SDistCommand(sdist):
     def run(self):
         self.run_command('build_js')
-        super().run()
+        super(SDistCommand, self).run()
 
 
 class DevelopCommand(develop):
     def run(self):
         self.run_command('build_js')
-        super().run()
+        super(DevelopCommand, self).run()
 
 
 setup(
