@@ -33,19 +33,19 @@ class BuildJSCommand(Command):
             raise OSError('JavaScript build failed')
 
 
-class BuildCommand(build_py):
+class BuildCommand(build_py, object):
     def run(self):
         self.run_command('build_js')
         super(BuildCommand, self).run()
 
 
-class SDistCommand(sdist):
+class SDistCommand(sdist, object):
     def run(self):
         self.run_command('build_js')
         super(SDistCommand, self).run()
 
 
-class DevelopCommand(develop):
+class DevelopCommand(develop, object):
     def run(self):
         self.run_command('build_js')
         super(DevelopCommand, self).run()
