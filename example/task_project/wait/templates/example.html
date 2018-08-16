@@ -9,7 +9,7 @@
     <script src="{% static "django-task-api.js" %}"></script>
     <script type="text/javascript">
         function startTask() {
-            TaskAPI.run('wait', {'start': 0}, function(json) {
+            TaskAPI.run('wait', {'seconds': 10}, function(json) {
                 if (json.target === null || json.progress === null) {
                     return
                 }
