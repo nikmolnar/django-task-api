@@ -1,5 +1,4 @@
 import pytest
-from pytest import raises
 
 from task_api.params import Parameter, StringParameter, ListParameter, NumberParameter, ParameterNotValidError, \
     IntParameter, FloatParameter, BooleanParameter, DictParameter

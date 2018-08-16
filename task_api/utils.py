@@ -7,6 +7,9 @@ TASK_API_BACKEND = getattr(settings, 'TASK_API_BACKEND', 'task_api.backends.cele
 
 
 def resolve_class(path):
+    if isinstance(path, type):
+        return path
+
     try:
         module_name, class_name = path.rsplit('.', 1)
         module = import_module(module_name)

@@ -125,3 +125,6 @@ BACKGROUND_TASKS = [
     'tests.test_api.CreateTask',
     'tests.test_api.CreateTackInvalidInputs'
 ]
+
+TASK_API_AUTHENTICATION_CLASSES = ['rest_framework.authentication.SessionAuthentication']
+TASK_API_PERMISSIONS_CLASSES = ['rest_framework.permissions.IsAuthenticated']
