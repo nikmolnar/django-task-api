@@ -8,6 +8,8 @@ from setuptools.command.develop import develop
 from setuptools.command.build_py import build_py
 from setuptools.command.sdist import sdist
 
+import task_api
+
 DIR = os.path.dirname(__file__)
 
 
@@ -51,11 +53,17 @@ class DevelopCommand(develop, object):
         super(DevelopCommand, self).run()
 
 
+with open(os.path.join(os.path.dirname(__file__), 'README.rst'), 'r') as f:
+    long_description = f.read()
+
+
 setup(
     name='django-task-api',
     description='A REST API for managing background tasks in Django',
+    long_description=long_description,
+    long_description_content_type='text/x-rst',
     keywords='django,task,api,background,rest',
-    version='0.0.0',
+    version=task_api.__version__,
     packages=['task_api', 'task_api.backends', 'task_api.migrations'],
     package_data={'task_api': ['static/*.js']},
     install_requires=['djangorestframework==3.*', 'django>=1.11', 'celery==4.*', 'six'],

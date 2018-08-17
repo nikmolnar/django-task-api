@@ -49,5 +49,5 @@ promises (will Polyfill for older browsers) and traditional callbacks.
 Next Steps
 ----------
 
-* :doc:`start`
+* `Getting Started <https://django-task-api.readthedocs.io/en/latest/start.html>`_
 * `GitHub <https://github.com/nikmolnar/django-task-api>`_
