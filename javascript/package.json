@@ -1,6 +1,6 @@
 {
   "name": "django-task-api",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "Client library for the Django Task API",
   "main": "dist/django-task-api.min.js",
   "module": "src/index.js",
@@ -9,7 +9,7 @@
     "src"
   ],
   "scripts": {
-    "build": "webpack --config webpack.config.babel.js && cp dist/django-task-api.js ../task_api/static/"
+    "build": "webpack --config webpack.config.babel.js && cp dist/django-task-api.min.js ../task_api/static/"
   },
   "repository": {
     "type": "git",
