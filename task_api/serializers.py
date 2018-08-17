@@ -9,7 +9,7 @@ from rest_framework import serializers
 from task_api.models import TaskInfo
 from task_api.params import ParameterNotValidError
 
-BACKGROUND_TASKS = getattr(settings, 'BACKGROUND_TASKS', [])
+BACKGROUND_TASKS = getattr(settings, 'TASK_API_BACKGROUND_TASKS', [])
 
 
 class TaskInfoSerializer(serializers.ModelSerializer):
