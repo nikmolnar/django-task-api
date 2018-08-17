@@ -54,6 +54,7 @@ Next Steps
 
 .. toctree::
    :maxdepth: 2
+   :hidden:
 
    start
 
