@@ -122,6 +122,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-BACKGROUND_TASKS = [
+TASK_API_BACKGROUND_TASKS = [
     'wait.background.JustWaitTask'
 ]
