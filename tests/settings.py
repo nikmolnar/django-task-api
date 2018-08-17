@@ -121,7 +121,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-BACKGROUND_TASKS = [
+TASK_API_BACKGROUND_TASKS = [
     'tests.test_api.CreateTask',
     'tests.test_api.CreateTackInvalidInputs'
 ]
