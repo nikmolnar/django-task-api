@@ -57,6 +57,7 @@ Next Steps
    :hidden:
 
    start
+   guides/index
    references/index
 
 
