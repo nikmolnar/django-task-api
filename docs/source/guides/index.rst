@@ -2,6 +2,7 @@ Guides
 ======
 
 .. toctree::
-    :maxdepth: 2
+   :maxdepth: 2
 
-    tasks
+   tasks
+   javascript
