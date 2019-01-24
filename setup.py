@@ -66,7 +66,7 @@ setup(
     version=task_api.__version__,
     packages=['task_api', 'task_api.backends', 'task_api.migrations'],
     package_data={'task_api': ['static/*.js']},
-    install_requires=['djangorestframework==3.*', 'django>=1.11', 'celery==4.*', 'six'],
+    install_requires=['djangorestframework==3.*', 'django>=1.11.18', 'celery==4.*', 'six'],
     tests_require=['pytest-django', 'mock'],
     python_requires='>=2.7, >=3.4',
     url='https://github.com/nikmolnar/django-task-api',

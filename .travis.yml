@@ -26,7 +26,7 @@ matrix:
 
 install:
   - "pip install mock"
-  - "pip install django==$DJANGO_VERSION"
+  - "pip install \"django>=$DJANGO_VERSION\""
   - "python setup.py develop"
   - "pip install pytest-django"
 
