@@ -98,7 +98,7 @@ JavaScript to start and monitor a task:
         <meta charset="UTF-8">
         <title>Task API Example</title>
 
-        <script src="{% static "django-task-api.js" %}"></script>
+        <script src="{% static "django-task-api.min.js" %}"></script>
         <script type="text/javascript">
             function startTask() {
                 TaskAPI.run('wait', {'seconds': 10}, function(json) {

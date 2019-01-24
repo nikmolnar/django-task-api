@@ -34,7 +34,7 @@ promises (will Polyfill for older browsers) and traditional callbacks.
 
 .. code-block:: html
 
-    <script src="{% static 'django-task-api.js' %}"></script>
+    <script src="{% static 'django-task-api.min.js' %}"></script>
 
     <script type="text/javascript">
         function sumTask(numbers) {

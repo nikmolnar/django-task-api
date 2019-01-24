@@ -17,7 +17,7 @@ There are two ways to get the JS library:
 
         {# ... #}
 
-        <script src="{% static 'django-task-api.js' %}"></script>
+        <script src="{% static 'django-task-api.min.js' %}"></script>
 
 2. Install with ``npm``. If you are using a build process for your front-end code, this is a good option::
 
@@ -27,7 +27,7 @@ Basic usage
 -----------
 
 Start tasks with the `run()` function. How you use this depends on how you installed the library. If you included
-``django-task-api.js`` in your HTML template, you can access the library through the ``TaskAPI`` global variable:
+``django-task-api.min.js`` in your HTML template, you can access the library through the ``TaskAPI`` global variable:
 
 .. code-block:: javascript
 
