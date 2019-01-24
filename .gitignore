@@ -3,6 +3,7 @@ syntax: glob
 /db.sqlite3
 /example/task_project/db.sqlite3
 *.egg-info/
+.eggs/
 /.pytest_cache/
 __pycache__/
 node_modules/

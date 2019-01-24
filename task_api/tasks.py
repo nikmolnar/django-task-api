@@ -61,6 +61,10 @@ class Task(object):
             k = list(self.outputs.keys())[0]
             info.outputs = json.dumps({k: self.outputs[k].to_json(outputs)})
 
+        info.status = 'succeeded'
+        info.finished = now()
+        info.save()
+
     def add_message(self, message):
         """ Add a message to the task, which can be accessed from the API """
 
