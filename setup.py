@@ -1,4 +1,5 @@
 import os
+import sys
 from distutils.cmd import Command
 from distutils.log import ERROR
 from subprocess import Popen
@@ -56,6 +57,11 @@ class DevelopCommand(develop, object):
 with open(os.path.join(os.path.dirname(__file__), 'README.rst'), 'r') as f:
     long_description = f.read()
 
+if sys.version_info[0] > 2:
+    install_requires = ['djangorestframework==3.*', 'django>=1.11.23', 'celery==4.*', 'six']
+else:
+    install_requires = ['djangorestframework<3.10', 'django>=1.11.23,<1.12', 'celery==4.*', 'six']
+
 
 setup(
     name='django-task-api',
@@ -66,7 +72,7 @@ setup(
     version=task_api.__version__,
     packages=['task_api', 'task_api.backends', 'task_api.migrations'],
     package_data={'task_api': ['static/*.js']},
-    install_requires=['djangorestframework==3.*', 'django>=1.11.18', 'celery==4.*', 'six'],
+    install_requires=install_requires,
     tests_require=['pytest-django', 'mock'],
     python_requires='>=2.7, >=3.4',
     url='https://github.com/nikmolnar/django-task-api',
