@@ -102,3 +102,8 @@ const raiseForStatus = response => {
     return response
 
 }
+
+export default {
+    run,
+    options
+}
