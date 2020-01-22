@@ -13,7 +13,7 @@ BACKGROUND_TASKS = getattr(settings, 'TASK_API_BACKGROUND_TASKS', [])
 
 
 class TaskInfoSerializer(serializers.ModelSerializer):
-    inputs = serializers.DictField(allow_null=True)
+    inputs = serializers.DictField(allow_null=True, write_only=True)
     outputs = serializers.DictField(read_only=True)
     messages = serializers.ListField(read_only=True)
 

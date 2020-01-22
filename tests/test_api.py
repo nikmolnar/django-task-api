@@ -34,7 +34,6 @@ def test_create_task(_, admin_client, django_user_model):
 
     data = json.loads(response.content.decode())
 
-    assert data['inputs'] == {'test': 'Test', 'optional': 'Test'}
     assert data['uuid'] == str(TaskInfo.objects.all().get().uuid)
 
 
@@ -69,7 +68,6 @@ def test_create_task_optional_input(_, client, django_user_model):
 
     data = json.loads(response.content.decode())
 
-    assert data['inputs'] == {'test': 'Test'}
     assert data['uuid'] == str(TaskInfo.objects.all().get().uuid)
 
 
@@ -116,7 +114,6 @@ def test_get_task(client, django_user_model):
     data = json.loads(response.content.decode())
 
     assert 'backend_data' not in data
-    assert data['inputs']['input'] == 'some input'
     assert data['outputs']['output'] == 'some output'
     assert data['messages'] == ['message 1', 'message 2']
 
@@ -127,7 +124,6 @@ def test_authentication(client):
         task='tests.test_api.CreateTask',
         backend_data='Not public',
         status='running',
-        inputs=json.dumps({'input': 'some input'}),
         outputs=json.dumps({'output': 'some output'}),
         messages=json.dumps(['message 1', 'message 2']),
         created=now(),
