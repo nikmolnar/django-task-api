@@ -27,6 +27,7 @@ class Task(object):
 
         backend_cls = get_backend_cls()
         info = TaskInfo.objects.create(
+            task=self.name,
             inputs=json.dumps(inputs or {}),
             created=now()
         )

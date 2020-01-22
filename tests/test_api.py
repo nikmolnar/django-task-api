@@ -23,9 +23,11 @@ def test_create_task(_, admin_client, django_user_model):
     user = django_user_model.objects.create(username='test')
     admin_client.force_login(user)
 
+    inputs = {'test': 'Test', 'optional': 'Test'}
+
     response = admin_client.post(
         '/tasks/',
-        json.dumps({'task': 'create_task', 'inputs': {'test': 'Test', 'optional': 'Test'}}),
+        json.dumps({'task': 'create_task', 'inputs': inputs}),
         content_type='application/json'
     )
 
@@ -34,7 +36,11 @@ def test_create_task(_, admin_client, django_user_model):
 
     data = json.loads(response.content.decode())
 
-    assert data['uuid'] == str(TaskInfo.objects.all().get().uuid)
+    task = TaskInfo.objects.all().get()
+    assert data['uuid'] == str(task.uuid)
+    assert task.task == 'create_task'
+    assert task.created is not None
+    assert json.loads(task.inputs) == inputs
 
 
 @pytest.mark.django_db(transaction=True)
