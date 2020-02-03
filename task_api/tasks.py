@@ -41,7 +41,7 @@ class Task(object):
         inputs = json.loads(info.inputs)
 
         TaskInfo.objects.filter(pk=info.pk).update(status='running', started=now())
-        self.info = info
+        self.info = TaskInfo.objects.get(pk=info.pk)
 
         try:
             outputs = self.run(**{k: v.to_python(inputs[k]) for k, v in self.inputs.items() if k in inputs})
