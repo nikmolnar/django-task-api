@@ -60,7 +60,7 @@ with open(os.path.join(os.path.dirname(__file__), 'README.rst'), 'r') as f:
 if sys.version_info[0] > 2:
     install_requires = ['djangorestframework==3.*', 'django>=1.11.23', 'celery==4.*', 'six']
 else:
-    install_requires = ['djangorestframework<3.10', 'django>=1.11.23,<1.12', 'celery==4.*', 'six']
+    install_requires = ['djangorestframework<3.10', 'django>=1.11.23,<1.12', 'celery==4.*', 'six', 'zipp<2']
 
 
 setup(
