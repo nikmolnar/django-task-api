@@ -57,14 +57,12 @@ class Task(object):
         if outputs is None:
             return
         elif isinstance(outputs, dict):
-            info.outputs = json.dumps({k: v.to_json(outputs[k]) for k, v in self.outputs.items() if k in outputs})
+            output_data = json.dumps({k: v.to_json(outputs[k]) for k, v in self.outputs.items() if k in outputs})
         elif len(self.outputs) == 1:
             k = list(self.outputs.keys())[0]
-            info.outputs = json.dumps({k: self.outputs[k].to_json(outputs)})
+            output_data = json.dumps({k: self.outputs[k].to_json(outputs)})
 
-        info.status = 'succeeded'
-        info.finished = now()
-        info.save()
+        TaskInfo.objects.filter(pk=info.pk).update(status='succeeded', finished=now(), outputs=output_data)
 
     def add_message(self, message):
         """ Add a message to the task, which can be accessed from the API """
