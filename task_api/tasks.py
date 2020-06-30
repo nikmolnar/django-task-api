@@ -52,8 +52,6 @@ class Task(object):
 
         self.info = None
 
-        TaskInfo.objects.filter(pk=info.pk).update(status='succeeded', finished=now())
-
         if outputs is None:
             return
         elif isinstance(outputs, dict):
