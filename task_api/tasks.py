@@ -67,7 +67,7 @@ class Task(object):
 
         messages = json.loads(self.info.messages)
         messages.append(message)
-        self.info.message = json.dumps(messages)
+        self.info.messages = json.dumps(messages)
         self.info.save()
 
     def set_target(self, target):

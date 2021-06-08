@@ -22,6 +22,11 @@ class SomeTask(Task):
         print('Success!')
 
 
+class MessageTask(Task):
+    def run(self):
+        self.add_message('Test')
+
+
 def test_copy_inputs_outputs():
     task = Task()
     assert task.inputs is not Task.inputs
@@ -73,3 +78,14 @@ def test_task_execute_exception(run_mock):
     SomeTask().execute(info)
     run_mock.assert_called_with(num=5)
     assert TaskInfo.objects.get(pk=info.pk).status == 'failed'
+
+
+@pytest.mark.django_db(transaction=True)
+def test_task_message():
+    info = TaskInfo.objects.create(
+        task='tests.test_task.MessageTask',
+        inputs=json.dumps({}),
+        created=now()
+    )
+    MessageTask().execute(info)
+    assert TaskInfo.objects.filter(pk=info.pk, messages='["Test"]').exists()

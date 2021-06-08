@@ -8,8 +8,8 @@ Install the Python library with pip::
 
     $ pip install django-task-api
 
-Django Task API is compatible and tested with Python versions 2.7, 3.5, 3.6, and 3.7, and with Django versions 1.11,
-2.0, and 2.1.
+Django Task API is compatible and tested with Python versions 3.6 through 3.9, and with Django versions 2.2, 3.1, and
+3.2.
 
 Set up Celery
 -------------
