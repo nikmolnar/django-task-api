@@ -31,20 +31,20 @@ jobs:
         python -m pip install poetry
         poetry env use system
 
-    - name: Install celery
-      run: |
-        poetry run pip install "celery==${{ matrix.celery-version }}"
-
-    - name: Install Django
-      run: |
-        poetry run pip install "django==${{ matrix.django-version }}"
-
     - name: Install dependencies
       run: |
         poetry env use system
         poetry install
 
+    - name: Install celery
+      run: |
+        poetry run pip install --force-reinstall "celery==${{ matrix.celery-version }}"
+
+    - name: Install Django
+      run: |
+          poetry run pip install --force-reinstall "django==${{ matrix.django-version }}"
+
     - name: Run tests
       run: |
         echo "Using celery version " `poetry run celery --version`
-        poetry run pytest
+        poetry run python -m pytest
