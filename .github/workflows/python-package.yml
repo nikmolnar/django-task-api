@@ -33,11 +33,11 @@ jobs:
 
     - name: Install celery
       run: |
-        poetry run pip install "celery==${{ celery-version }}"
+        poetry run pip install "celery==${{ matrix.celery-version }}"
 
     - name: Install Django
       run: |
-        poetry run pip install "django==${{ django-verrsion }}"
+        poetry run pip install "django==${{ matrix.django-version }}"
 
     - name: Install dependencies
       run: |
