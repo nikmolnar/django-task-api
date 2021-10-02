@@ -1,0 +1,29 @@
+[tool.poetry]
+name = "django-task-api"
+version = "1.2.5"
+description = "A REST API for managing background tasks in Django"
+authors = ["Nikolas Stevenson-Molnar <nik.molnar@consbio.org>"]
+license = "MIT"
+classifiers = [
+    'Programming Language :: Python :: 3',
+    'Programming Language :: Python :: 3.6',
+    'Programming Language :: Python :: 3.7',
+    'Programming Language :: Python :: 3.8',
+    'Programming Language :: Python :: 3.9'
+]
+
+[tool.poetry.dependencies]
+python = "^3.6"
+djangorestframework = "^3.0"
+Django = "^2.0"
+celery = ">=4"
+six = "^1.16.0"
+
+[tool.poetry.dev-dependencies]
+mock = "^4.0.3"
+pytest-django = "^4.4.0"
+pytest = "^6.2.5"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
