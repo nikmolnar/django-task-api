@@ -44,6 +44,7 @@ jobs:
 
     - name: Publish Node module
       run: |
+        cd javascript
         npm publish
       env:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
