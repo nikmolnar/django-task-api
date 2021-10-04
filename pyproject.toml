@@ -4,12 +4,16 @@ version = "1.2.5"
 description = "A REST API for managing background tasks in Django"
 authors = ["Nikolas Stevenson-Molnar <nik.molnar@consbio.org>"]
 license = "MIT"
+packages = [
+    { include = "task_api" }
+]
+include = ["task_api/static/*.js"]
 classifiers = [
-    'Programming Language :: Python :: 3',
-    'Programming Language :: Python :: 3.6',
-    'Programming Language :: Python :: 3.7',
-    'Programming Language :: Python :: 3.8',
-    'Programming Language :: Python :: 3.9'
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.6",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9"
 ]
 
 [tool.poetry.dependencies]
