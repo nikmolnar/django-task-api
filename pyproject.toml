@@ -19,7 +19,7 @@ classifiers = [
 [tool.poetry.dependencies]
 python = "^3.6"
 djangorestframework = "^3.0"
-Django = "2.2 || ^3.2 || ^4.0"
+Django = ">=2.2,!(>=3,<3.2)"
 celery = ">=4"
 six = "^1.16.0"
 
