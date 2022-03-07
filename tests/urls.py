@@ -1,5 +1,5 @@
-from django.conf.urls import url, include
+from django.urls import re_path, include
 
 urlpatterns = [
-    url(r'^', include('task_api.urls')),
+    re_path(r'^', include('task_api.urls')),
 ]
