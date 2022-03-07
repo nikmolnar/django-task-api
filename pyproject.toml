@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "django-task-api"
-version = "1.4.0"
+version = "1.4.1"
 description = "A REST API for managing background tasks in Django"
 authors = ["Nikolas Stevenson-Molnar <nik.molnar@consbio.org>"]
 license = "MIT"
